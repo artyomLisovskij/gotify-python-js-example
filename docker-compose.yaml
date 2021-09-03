@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  gotify:
+    image: gotify/server
+    ports:
+      - 8080:80
+    volumes:
+      - "./gotify_data:/app/data"
+    container_name: gotify
+
+  web:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ".:/usr/share/nginx/html"
+      - "./nginx.conf:/etc/nginx/conf.d/default.conf"
+
+  pusher:
+    depends_on:
+      - gotify
+    build: .

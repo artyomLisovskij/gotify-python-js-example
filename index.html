@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>just test</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var socket = new WebSocket('ws://localhost/ws/');
+            socket.onerror = function() {
+                console.log()
+            };
+            
+            socket.onopen = function() {
+                // alert('handshake successfully established. May send data now...');
+                socket.send("Hi there from browser.");
+            };
+            socket.onmessage = function (evt) {
+                //alert("About to receive data");
+                var received_msg = evt.data;
+                alert("Message received = "+received_msg);
+            };
+            socket.onclose = function() {
+                alert('connection closed');
+            };
+        </script>
+    </body>
+</html>
